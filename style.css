@@ -1,0 +1,95 @@
+body{
+    background-color: aqua;
+}
+#newTask{
+    height:50px;
+    border:none;
+    outline: none;
+    border-radius:10px;
+    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans;
+    font-size: 20px;
+}
+
+#addTask{
+    margin-left:20px;
+    border-radius: 5px; 
+    background-color:rgb(139, 209, 34);
+    height:50px;
+    width:50px;
+    border:none;
+    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+    font-size:15px;
+}
+#addTask:hover{
+    background-color:rgb(168, 241, 58);
+}
+
+#inputArea{
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+#taskContainer{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    background-color: blue;
+    border-radius: 20px;
+    height: fit-content;
+    width: 400px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.tasks{
+    display: flex;
+    align-items: center;
+    margin-bottom:10px;
+    background-color: azure;
+    border-radius: 10px;
+    height:max-content;
+    width:300px;
+}
+
+.task{
+    display:flex;
+    width: 300px;
+}
+
+.tasks .task h1{
+    margin-left:10px;
+    display: block;
+    font-family:'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+    width: 220px;
+}
+
+.DeleteButton{
+    border:none;
+    background-color:azure;
+    font-weight: bold;
+    font-size:30px;
+    height:30px;
+    width:30px;
+    margin-left: auto;
+    margin-top: auto;
+    margin-right: 10px;
+    margin-bottom: 10px;
+}
+.DeleteButton:hover{
+    font-size:35px;
+    margin-right: 12.5px;
+    margin-bottom: 12.5px;
+}
+.CheckButton{
+    display:block;
+    background-color:azure;
+    border:none;
+    font-size:40px;
+    margin-top:auto;
+}
+.CheckButton:hover span{
+    display:none;
+}
+
+.CheckButton:hover:before{
+    content:"☑";
+}

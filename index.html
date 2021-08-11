@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Task Manager</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div id="taskContainer">
+        <div id="inputArea">
+            <input placeholder="New Task" id="newTask">
+            <button id="addTask" onclick="taskAdder()">Add</button>
+        </div>
+        <div id="taskHolder">
+        </div>
+    </div>
+</body>
+
+<script>
+    let keys = Object.keys(localStorage)
+    console.log(keys.length)
+    console.log(keys)
+    for (let i = 1; i <= keys.length; i++) {
+        console.log(localStorage.getItem(`${i}`))
+        
+        let task = localStorage.getItem(`${i}`)
+        task = JSON.parse(task)
+        let taskArea = document.getElementById("taskHolder");
+        let taskText = task['task']
+        let completed = task['complete']
+        let check = ''
+        if (completed == true); {
+            check = '☑';
+        } 
+        if (completed == false) {
+            check = '☐';
+        }
+
+        let taskUI = document.createElement('div');
+        taskUI.className = 'tasks';
+        taskUI.id = `tasks${i}`
+        taskUI.innerHTML = `<div id="Task${i}" class="task">
+    <h1 id="${i}">${taskText}</h1>
+    <button id="${i}" class="CheckButton"onclick="Finish()"><span id="Check${i}">${check}</span></button>
+    <button class="DeleteButton" id="${i}" onclick="taskRemover()">❌</button>
+</div>`
+taskArea.appendChild(taskUI);
+    }
+</script>
+
+<script>
+    let id = 1;
+    let allTasks = {}
+    function taskAdder(){
+        let taskArea = document.getElementById("taskHolder");
+        let task = document.getElementById("newTask").value;
+        let taskUI = document.createElement("div");
+        taskUI.className = "tasks";
+        taskUI.id = `tasks${id}`
+        taskUI.innerHTML = `<div id="Task${id}" class="task">
+        <h1 id="${id}">${task}</h1>
+        <button id="${id}" class="CheckButton"onclick="Finish()"><span id="Check${id}">☐</span></button>
+        <button class="DeleteButton" id="${id}" onclick="taskRemover()">❌</button>
+        </div>`
+        taskArea.appendChild(taskUI);
+        document.getElementById("newTask").value = "";
+        let taskData = {
+            'task': task,
+            'complete': false
+        }
+        let theTask = JSON.stringify(taskData);
+        localStorage.setItem(`${id}`, theTask)
+        allTasks[`${id}`] = taskData
+        console.log(allTasks)
+        id = id + 1;
+    }
+
+    function taskRemover(){
+        let taskNumber = event.srcElement.id
+        let task = document.getElementById(`tasks${taskNumber}`)
+        delete allTasks[`${taskNumber}`];
+        localStorage.removeItem(`${taskNumber}`)
+        --id;
+        task.remove();
+        console.log(allTasks)
+    }
+    function Finish(){
+        let id = event.srcElement.id;
+        document.getElementById(`Check${id}`).textContent = "☑";
+        allTasks[`${id}`]['complete'] = true;
+        let theTask = JSON.stringify(allTasks[`${id}`]);
+        localStorage.setItem(`${id}`, theTask)
+        console.log(localStorage.getItem(`${id}`))
+        console.log(allTasks)
+    }
+</script>
+</html>
